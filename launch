@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# if argument is not supplied
+if [ -z "$1" ]; then
+    echo "No argument supplied";
+    echo "Usage: ./launch <file> [omit .tex]";
+    exit 1;
+fi
+
+# if argument is suffixed with file format -> remove format
+if [ "${1: -4}" == ".tex" ] || [ "${1: -4}" == ".pdf" ]; then
+    # echo "suffixed with .tex or .pdf file format";
+    filename=${1::${#1}-4};
+else
+    filename=$1;
+fi
+
+# if filename is empty or file is not found
+if [ "$filename" == "" ] || ! [ -f "$filename.tex" ]; then
+    echo "File was not found";
+    exit 1;
+fi
+
+# open the latex file given in VS code
+code "$filename.tex";
+
+# compile the latex document to pdf format
+pdflatex "$filename.tex";
+
+# if latex file successfully compiled
+if [ $? -eq 0 ]; then
+    # attempts to open the pdf in Mac, and if that fails,
+    # then the Linux xdg-open is used.
+    $(open "$filename.pdf";) || $(xdg-open "$filename.pdf";) # mac || linux
+else
+    # latex file did not compile, report failure
+    exit 1;
+fi
+
+exit 0;
