@@ -1,5 +1,5 @@
 # latex-launch
-Bash script for opening a given LaTeX file in VS code, followed by compilation of that file, and finally opening the resulting pdf.<br/>
+Bash script that opens a given LaTeX file in VS code, compiles that file, and then opens the resulting pdf.<br/>
 For Mac-OS and Linux based Machines.
 
 # Initialisation
