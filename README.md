@@ -14,7 +14,7 @@ cd ~/Downloads
 ```
 3. Ensure the script has sufficient permissions: 
 ```
-chmod 700 launch
+chmod 755 launch
 ```
 
 # Usage
